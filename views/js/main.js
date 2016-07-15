@@ -501,11 +501,13 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
+  document.querySelector('#movingPizzas1').className = 'mover-hidden';
   var items = document.querySelectorAll('.mover');
-  for (var i = 0; i < items.length; i++) {
+  for (i = 0; i < items.length; i++) {
     var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
+  document.querySelector('#movingPizzas1').className = '';
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
@@ -521,16 +523,18 @@ function updatePositions() {
 window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {console.log('loaded');
   var cols = 8;
   var s = 256;
+  var frag = document.createDocumentFragment();
   for (var i = 0; i < 200; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    frag.appendChild(elem);
   }
+  document.querySelector("#movingPizzas1").appendChild(frag);
   updatePositions();
 });
