@@ -26,9 +26,6 @@ form {
   height: 100px;
   width: 73px;
 }
-.mover-hidden {
-  display: none;
-}
 .randomPizzaContainer {
   float: left;
   display: flex;

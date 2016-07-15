@@ -501,13 +501,12 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  document.querySelector('#movingPizzas1').className = 'mover-hidden';
   var items = document.querySelectorAll('.mover');
+  var scrollTop = document.body.scrollTop;
   for (i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    var phase = Math.sin((scrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
-  document.querySelector('#movingPizzas1').className = '';
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
